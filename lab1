@@ -1,0 +1,32 @@
+#include <vcl.h>
+#pragma hdrstop
+#include <conio.h>
+#include <iostream>
+#include <math.h>
+#pragma argsused
+using namespace std;
+int fibbana4(int a)
+{
+	unsigned long long int x = 1;
+	unsigned long long int y = 0;
+        unsigned long long int result;
+	for (int i = 1; i <= a; i++)
+	{
+		result = x + y;
+                cout << result << "  \n";
+		x = y;
+		y = result;
+	}
+
+        return result;
+}
+int main(int argc, char* argv[])
+{
+        int input;
+        cout << "number of character:";
+        cin >> input;
+        fibbana4(input);
+        system("pause");
+}
+
+
