@@ -1,0 +1,82 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+#include <conio.h>
+#include <iostream>
+#include <math.h>
+#include <windows.h>
+#pragma argsused
+using namespace std;
+int main(int argc, char* argv[])
+{
+SetConsoleOutputCP(1251);
+SetConsoleCP(1251);
+int ksis,itiu,re,tk,kp,mat,eng,srb,fiz;
+int fakult;
+int i,z;
+while (1)
+ {
+ cout<<"1: KSIS\n2: ITIU\n3: RE\n4: TK\n5: KP\nInput number:";
+ cin>>fakult;
+ cout<<"INFO:\n";
+ switch (fakult)
+ {
+   case 1: cout<<"::::::BSUIR::::::\nÔàêóëüòåò êîìïüþòåðíûõ ñèñòåì è ñåòåé ÿâëÿåòñÿ îäíèì èç âåäóùèõ ôàêóëüòåòîâ â Ðåñïóáëèêå Áåëàðóñü ïî ïîäãîòîâêå ÈÒ-ñïåöèàëèñòîâ.\n";
+   break;
+   case 2: cout<<"::::::ITIU::::::\nÍà ÔÈÒÓ ãîòîâÿò ñïåöèàëèñòîâ øèðîêîãî ïðîôèëÿ êîòîðûå ñ ë¸ãêîñòüþ çàéìóò äîñòîéíûå ìåñòà íà ðûíêå òðóäà.\n";
+   break;
+   case 3: cout<<":::::::RE::::::\nÑîâðåìåííàÿ ðàäèîèíôîðìàöèîííàÿ ñèñòåìà ïðåäíàçíà÷åíà äëÿ èçâëå÷åíèÿ, ôîðìèðîâàíèÿ, ïðèåìà, ïåðåäà÷è è îáðàáîòêè èíôîðìàöèè. Äëÿ ðåøåíèÿ íàçâàííûõ çàäà÷ íåîáõîäèìû ñïåöèàëèñòû\n";
+   break;
+   case 4: cout<<"::::::TK::::::\nÔàêóëüòåò òåëåêîìóíèêàöèé îáåñïå÷èâàåò äîñòîéíîå îáðàçîâàíèå òåì, êîãî âëå÷åò ñîâðåìåííàÿ ýëåêòðîíèêà è èíôîðìàòèêà.\n";
+   break;
+   case 5: cout<<"::::::KP:::::\nÎñíîâíîé äåÿòåëüíîñòüþ ôàêóëüòåòà ÿâëÿåòñÿ êîìïüþòåðíîå ïðîåêòèðîâàíèå. Âîò óæå 40 ëåò ãîòîâèò ñïåöèàëèñòîâ èíæåíåðíîãî ïðîôèëÿ.\n";
+   break;
+     return fakult;
+ }
+ cout<<"Ur mark math:\n";
+ cin>>mat;
+ cout<<"Ur mark fiz:\n";
+ cin>>fiz;
+ cout<<"Ur mark eng:\n";
+ cin>>eng;
+ cout<<"Ur mark srb:\n";
+ cin>>srb;
+
+ if ((srb+fiz+eng+mat)>= 351)
+  {
+   cout<<"KSIS WELCOME\n";
+  }
+ if (((srb+fiz+eng+mat)>= 340) && ((srb+fiz+eng+mat)<= 350))
+  {
+   cout<<"ITIU WELCOME\n";
+  }
+ if (((srb+fiz+eng+mat)>= 330) && ((srb+fiz+eng+mat)<= 339))
+  {
+   cout<<"RE WELCOME\n";
+  }
+ if (((srb+fiz+eng+mat)>= 320) && ((srb+fiz+eng+mat)<= 329))
+  {
+   cout<<"TK WELCOME\n";
+  }
+ if (((srb+fiz+eng+mat)>= 310) && ((srb+fiz+eng+mat)<= 319))
+  {
+   cout<<"KP WELCOME\n";
+  }
+
+ cout<<"1 - go\n2- end\n";
+ cin>>z;
+ if (z==1)
+ {
+   continue;
+ }
+
+ if (z==2)
+ {
+   break;
+ }
+ }
+system("pause");
+return fakult;
+}
+
+//---------------------------------------------------------------------------
