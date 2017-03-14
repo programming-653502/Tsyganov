@@ -1,0 +1,47 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+#include <conio.h>
+#include <iostream>
+#include <math.h>
+#pragma argsused
+using namespace std;
+long double fact(int N)
+{
+    if(N < 0)
+        return 0;
+    if (N == 0)
+        return 1;
+    else
+        return N * fact(N - 1);
+}
+int main(int argc, char* argv[])
+{
+ float *p = new float [4];
+ double x;
+ double sum,z,n,i,a,e,j,l;
+ cout<<"input i:";
+ cin>>i;
+ a=sin(i);       // SIN X    LEVAIA 4AST"
+ cout<<"Sleva"<<a<<"\n";
+ cout<<"x=";
+ cin>>x;
+ n=x;
+ cout<<"j=";
+ cin>>j;
+ sum=0;
+ for (n=1;n<=j;n++)
+ {
+   z=pow(-1,n-1)*((pow(x,2*n-1))/fact(2*n-1));  //   PRAVAIA
+   cout<<z<<"\n";
+   sum=sum+z;
+   l=a-sum;
+ }
+ cout<<"POGR:"<<l<<"\n";
+ cout<<"Sprava:"<<sum<<"\n";
+
+
+ system("pause");
+        return 0;
+}
+//---------------------------------------------------------------------------
