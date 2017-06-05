@@ -1,0 +1,55 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+//---------------------------------------------------------------------------
+#pragma argsused
+#include <stdio.h>
+#include <tchar.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+double A1,B1;
+string A,B;
+ifstream fileAB("fin1.txt");
+ifstream file1("fin.txt");
+double f(string str)
+ {
+  char s =str[2];
+  getline(fileAB,A);
+  getline(fileAB,B);
+  if (str[0 ] == 'A')
+  {
+   char stroka1[10],stroka2[10];
+   for (int i=4;i<A.length();i++)
+    {
+     stroka1[i-4]= A[i];
+     A1= atof(stroka1);
+    }
+   for (int i=4;i<B.length();i++)
+    {
+     stroka2[i-4]= B[i];
+     B1= atof(stroka2);     }
+    }
+    switch (s)
+     {
+      case '+': return A1 + B1;
+      case '-': return A1 - B1;
+      case '*': return A1 * B1;
+      case '/': return A1 / B1;
+     }
+}
+int main()
+{
+	string stroka;
+	if (getline(fileAB,A)) cout<<A<<endl;
+	if (getline(fileAB,B)) cout<<B<<endl;  // óñëîâèÿ
+        //------------------------------------------------
+	while (getline(file1,stroka))
+        {
+		cout<<stroka<<" = "<<f(stroka)<<endl;
+	}
+        //-------------------------------------------------------
+	system("pause"); // êîíåö
+        return 0;
+}
