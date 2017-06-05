@@ -1,0 +1,128 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+//---------------------------------------------------------------------------
+
+#pragma argsused
+#include <iostream>
+using namespace std;
+void sort(int **array, int M, int N)
+{
+    int n=0;
+    int *tmp=new int[N];
+    for(int k=0;k<M;k++)
+    {
+        int max=array[k][0];
+        for(int i=k;i<M;i++)
+            {
+                for(int j=0;j<N;j++)
+                {
+                    if ((array[i][j]!=0) && ((array[i][j])==(array[i][j+1])))
+                    {
+                        max=array[i][j];
+                        n=i;
+                    }
+                }
+            }
+        for(int i=0;i<N;i++)
+        {
+            tmp[i]=array[n][i];
+            array[n][i]=array[k][i];
+            array[k][i]=tmp[i];
+        }
+    }
+    delete [] tmp;
+     for (int i = 0; i < M; i++)
+     {
+        for(int j = 0; j < N; j++)  printf("%d ",array[i][j]);
+        printf("\n");
+     }
+}
+int main()
+{
+    setlocale(LC_CTYPE, "");
+    int n, m,i,j,temp,y;
+    cout << "Stroki:";
+    cin >> n;
+    cout << "Stolbi:";
+    cin >> m;
+    int **Matrica = new int*[n*sizeof(int*)];
+    for (i = 0; i < n; i++)
+    {
+        Matrica[i] = new int[m*sizeof(int)] ;
+    }
+        cout << "ishodnaia:" << endl;
+        	srand(time(NULL)) ;
+        for (i = 0; i<n; i++)
+        {
+            for ( j = 0; j<m; j++)
+            {
+                Matrica[i][j]=rand()%2 ;
+               printf("%3d", Matrica[i][j]) ;
+               } printf("\n") ;
+
+    }
+     sort(Matrica,m,n);
+        for (i = 0; i<n; i++)
+        {
+            temp = 0;
+            for (j = 0; j<m; j++)
+                if (Matrica[i][j] != 0)
+                    temp = 1;
+            if (temp == 0)
+            {
+                for (y = i; y<n - 1; y++)
+                    for (j = 0; j<m; j++)
+                        Matrica[y][j] = Matrica[y + 1][j];
+                n--;
+                i--;
+            }
+        }
+        for (i = 0; i<n; i++)
+        {
+            temp = 0;
+            for (j = 0; j<m; j++)
+                if (Matrica[i][j] != 1)
+                    temp = 1;
+            if (temp == 0)
+            {
+                for (y = i; y<n - 1; y++)
+                    for (j = 0; j<m; j++)
+                        Matrica[y][j] = Matrica[y + 1][j];
+                n--;
+                i--;
+            }
+        }
+        for (i = 0; i<n; i++)
+        {
+            temp = 0;
+            if (Matrica[i][j] == Matrica[i][j+1])
+                    temp = 1;
+            for (j = 0; j<m; j++)
+
+                if (Matrica[i][j] == Matrica[i][j+1])
+                    temp = 1;
+            if (temp == 0)
+            {
+                for (y = i; y<n - 1; y++)
+                    for (j = 0; j<m; j++)
+                        Matrica[y][j] = Matrica[y + 1][j];
+                n--;
+                i--;
+            }
+        }
+
+        cout << endl;
+        cout << "Poly4:" << endl;
+        for (i = 0; i<n; i++)
+        {
+            for (j = 0; j<m; j++)
+                cout << Matrica[i][j] << "  ";
+            cout << endl;
+        }
+    system("pause");
+    return 0;
+}
+//---------------------------------------------------------------------------
