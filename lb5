@@ -1,0 +1,69 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+#pragma argsused
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+ifstream spisok("Èñõîäíûé ñïèñîê.txt");
+ofstream inspisok("Èíâåðòèðîâàííûé ñïèñîê.txt");
+struct spisok1
+{
+  string name;  spisok1 *next;
+};
+spisok1 *perevorot(spisok1 *pervii,int f) {
+	switch (f % 2)
+        {
+	 case 1:
+         {
+		 return pervii;
+	        	break;
+         }
+	 case 0:
+         {
+		spisok1 *a, *perviiA = NULL;
+		for (;;)
+                {
+                   a = new spisok1;
+                   a -> name = pervii -> name;
+                   a -> next = perviiA;
+                   perviiA = a;
+                   pervii = pervii -> next;
+                   if (pervii == NULL)
+                         break;
+		}
+		return perviiA;
+	  }
+         }
+}
+int main()
+{
+	setlocale(0, "ru-RU");
+	spisok1 *first = NULL, *a, *b;
+	string name;
+	int i = 0;
+	for (;;)
+        {
+           if (spisok.eof()) break;
+           getline(spisok, name);
+           b = new spisok1;
+           b -> name = name;
+           b -> next = first;
+           first = b;
+	}
+	cout << "Viberete invertirovanie:" << endl;
+	cout << "1 - Invert Spis" << endl;
+	cout << "2 - pervono4alnii spis" << endl;
+	cin >> i;
+	a = perevorot(first,i);
+	for (;;)
+        {
+           inspisok << a -> name << endl;
+           a = a -> next;
+           if (a == NULL)
+              break;
+	}
+	system("pause");
+    return 0;
+}
