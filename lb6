@@ -1,0 +1,89 @@
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#pragma hdrstop
+#pragma argsused
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+ifstream text("Òåêñò.txt");
+struct  rile{
+	char i;
+	rile *a;
+	rile *b;
+};
+bool Glas(char glasnie[], char a)
+{
+	for (int i = 0; i < 6; i++)
+        {
+            if (a == glasnie[i]) return true;
+	}
+    	return false;
+}
+void proverka(rile *temp)
+{
+    if (temp->b == NULL) return;
+    cout << temp->b->a << endl;
+    proverka(temp->b);
+}
+
+bool RWD(char soglasnie[], char a)
+{
+    for (int i = 0; i < 20; i++)
+    {
+  	if (a == soglasnie[i]) return true;
+    }
+    return false;
+}
+void Tree(rile *vrem, int sym) {
+	if (sym > (int)vrem->a) {
+		if (vrem->b == NULL) {
+			vrem->b = new rile;
+			vrem->b->i = (char)sym;
+			vrem->b->b = NULL;
+			vrem->b->a = NULL;
+			return;
+		}
+		Tree(vrem->b, sym);
+	}
+	if (sym < (int)vrem->a) {
+		if (vrem->a == NULL) {
+			vrem->a = new rile;
+			vrem->a->i = (char)sym;
+			vrem->a->b = NULL;
+			vrem->a->a = NULL;
+			return;
+		}
+		Tree(vrem->a, sym);
+	}
+}
+int main()
+{
+        char soglasnie[] = {'s','g','l','c','p','q','f','d','w','h','j','k','r','z','x','t','v','b','n','m'};
+        char glasnie[] = {'e','a','i','u','y','o'};
+	string str;
+	getline(text, str);
+	rile *rt = new rile, *vrem;
+	rt->i = str[0];
+	rt->b = NULL;
+	rt->a = NULL;
+	for (int i = 1;i < str.length();i++) {
+		Tree(rt, (int)str[i]);
+	}
+	int glasn = 0, soglasn = 0;
+	for (int i = 0; i < str.length(); i++) {
+		if (Glas(glasnie, str[i])) glasn++;
+		if (RWD(soglasnie, str[i])) soglasn++;
+	}
+        cout << "Glasnie: " << glasn << endl;
+        cout << "Soglasnie: " << soglasn << endl;
+        if (glasn > soglasn)
+         cout << "Glasnix bol'she"<<endl;
+	else
+         if (soglasn > glasn)
+          cout << "Soglasnix bol'she"<<endl;
+	 else
+          cout << "Odinakovo"<<endl;
+        system("pause");
+    return 0;
+}
