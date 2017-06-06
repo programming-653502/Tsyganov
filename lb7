@@ -1,1 +1,322 @@
-# Tsyganov
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace space1
+{
+
+   
+    class ludi
+    {
+        private static int IdCounter = 0;
+
+        public int Id { get; private set; }
+        public string FIO { get; set; }
+        public string Pol { get; set; }
+        public string Vrednieprivi4ki { get; set; }
+        public string rostives { get; set; }
+        public string gorod { get; set; }
+        public string Interesi { get; set; }
+        public DateTime DenRozhden { get; set; }
+        public string Info { get; set; }
+
+        public ludi()
+        {
+            Id = IdCounter++;
+        }
+
+        public virtual void Show()
+        {
+            Console.WriteLine($"Id: {Id}");
+            Console.WriteLine($"FIO: {FIO}");
+            Console.WriteLine($"Pol: {Pol}");
+            Console.WriteLine($"Vrednie privi4ki: {Vrednieprivi4ki}");
+            Console.WriteLine($"rost i ves: {rostives}");
+            Console.WriteLine($"gorod: {gorod}");
+            Console.WriteLine($"Interesi: {Interesi}");
+            Console.WriteLine($"den rozhdenia: {DenRozhden}");
+            Console.WriteLine($"Info: {Info}");
+        }
+    }
+    class vstr
+    {
+        private static int IdCounter = 0;
+
+        public int Id { get; private set; }
+        public string Nazvanie { get; set; }
+        public string Zametki { get; set; }
+        public DateTime data { get; set; }
+        public TimeSpan vremia { get; set; }
+        public List<ludi> Yzhastniki { get; private set; }
+
+        public vstr()
+        {
+            Id = ++IdCounter;
+            Yzhastniki = new List<ludi>();
+        }
+
+        public void Dobavlenie(ludi y4astnik)
+        {
+            Yzhastniki.Add(y4astnik);
+        }
+
+        public void Show()
+        {
+            Console.WriteLine($"Id: {Id}");
+            Console.WriteLine($"Nazvanie: {Nazvanie}");
+            Console.WriteLine($"Zametki: {Zametki}");
+            Console.WriteLine($"data: {data}");
+            Console.WriteLine($"vremia: {vremia}");
+            Console.WriteLine("Yzhastniki: ");
+            foreach (ludi p in Yzhastniki)
+            {
+                Console.WriteLine($"{p.Id} - {p.FIO}");
+            }
+        }
+    }
+
+    class Program
+    {
+        
+        static List<ludi> LUDI;
+        static List<vstr> vstre4i;
+
+        static void Komandi()
+        {
+            Console.WriteLine("'ludi' - deistvia s ludmi");
+            Console.WriteLine("'vstr' - deistvia s vstre4ami");
+ 
+        }
+
+       
+
+        static void funkt()
+        {
+            foreach (ludi p in LUDI)
+            {
+                p.Show();
+                Console.WriteLine("//////");
+            }
+            Console.WriteLine(" 'Dobav' - dobavit contact");
+            Console.WriteLine("Vvedite ID dlia izmenenia");
+            string command = Console.ReadLine();
+            if (command == "Dobav")
+                Dobavlenie4el();
+            int id = 0;
+            if (int.TryParse(command, out id))
+            {
+                foreach (ludi p in LUDI)
+                    if (p.Id == id)
+                    {
+                        Izmenit4el(p);
+                        break;
+                    }
+            }
+        }
+
+        static void Izmenit4el(ludi zhel)
+        {
+            zhel.Show();
+            Console.WriteLine("Vvedite kategoriy dlia izmenenia");
+            string zaglavie = Console.ReadLine();
+            string tekst;
+            switch (zaglavie)
+            {
+                case "FIO":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.FIO = tekst;
+                    break;
+                case "Pol":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.Pol = tekst;
+                    break;
+                case "Vrednii Privi4ki":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.Vrednieprivi4ki = tekst;
+                    break;
+                case "Rost i ves":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.rostives = tekst;
+                    break;
+                case "Gorod":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.gorod = tekst;
+                    break;
+                case "Interesi":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.Interesi = tekst;
+                    break;
+                case "DenRozhden":
+                    while (true)
+                    {
+                        Console.WriteLine("Vvedite god/mesiats/den");
+                        try
+                        {
+                            int year = int.Parse(Console.ReadLine());
+                            int month = int.Parse(Console.ReadLine());
+                            int day = int.Parse(Console.ReadLine());
+                            DateTime drd = new DateTime(year, month, day);
+                            zhel.DenRozhden = drd;
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.WriteLine("Poprobuite snova");
+                        }
+                    }
+                    break;
+                case "Info":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    zhel.Info = tekst;
+                    break;
+            }
+        }
+
+        static void Dobavlenie4el()
+        {
+            Console.WriteLine("4elovek bil dobavlen");
+            LUDI.Add(new ludi());
+        }
+
+        static void funkt2()
+        {
+            foreach (vstr p in vstre4i)
+            {
+                p.Show();
+                Console.WriteLine("//////");
+            }
+            Console.WriteLine("Vvedite ID dlia izmenenia");
+            Console.WriteLine(" 'Dobav' - dobavit vstre4y");
+            string command = Console.ReadLine();
+            if (command == "Dobav")
+                Dobavitvstr();
+            int id = 0;
+            if (int.TryParse(command, out id))
+            {
+                foreach (vstr p in vstre4i)
+                    if (p.Id == id)
+                    {
+                        Izmenitvstr(p);
+                        break;
+                    }
+            }
+        }
+        static void Dobavitvstr()
+        {
+            Console.WriteLine("Vstre4ia bila dobavlena");
+            vstre4i.Add(new vstr());
+        }
+        static void Izmenitvstr(vstr ev)
+        {
+
+            ev.Show();
+            Console.WriteLine("Vvedite ID dlia izmenenia");
+            Console.WriteLine(" 'Dobav' - dobavit vstre4y");
+            string zaglavie = Console.ReadLine();
+            string tekst;
+            switch (zaglavie)
+            {
+                case "Nazvanie":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    ev.Nazvanie = tekst;
+                    break;
+                case "Zametki":
+                    Console.WriteLine("Vvod:");
+                    tekst = Console.ReadLine();
+                    ev.Zametki = tekst;
+                    break;
+                case "data":
+                    while (true)
+                    {
+                        Console.WriteLine("Vvedite god/mesiats/den");
+                        try
+                        {
+                            int year = int.Parse(Console.ReadLine());
+                            int month = int.Parse(Console.ReadLine());
+                            int day = int.Parse(Console.ReadLine());
+                            DateTime date = new DateTime(year, month, day);
+                            ev.data = date;
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.WriteLine("Poprobuite snova");
+                        }
+                    }
+                    break;
+                case "vremia":
+                    while (true)
+                    {
+                        Console.WriteLine("Vvedite 4asi minuti secundi");
+                        try
+                        {
+                            int hours = int.Parse(Console.ReadLine());
+                            int minutes = int.Parse(Console.ReadLine());
+                            int seconds = int.Parse(Console.ReadLine());
+                            TimeSpan time = new TimeSpan(hours, minutes, seconds);
+                            ev.vremia = time;
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            Console.WriteLine("Poprobuite snova");
+                        }
+                    }
+                    break;
+                case "Dobav":
+                    Console.WriteLine("Vvedite ID");
+                    int id;
+                    if (int.TryParse(Console.ReadLine(), out id))
+                    {
+                        foreach (ludi p in LUDI)
+                            if (p.Id == id)
+                            {
+                                ev.Dobavlenie(p);
+                                break;
+                            }
+                    }
+                    break;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+
+            LUDI = new List<ludi>();
+            vstre4i = new List<vstr>();
+            while (true)
+            {
+                Console.WriteLine("Vvedite komandy ( Soravka: Komandi ):");
+                string command = Console.ReadLine();
+                switch (command)
+                {
+                    case "Komandi":
+                        Komandi();
+                        break;
+                    case "ludi":
+                        funkt();
+                        break;
+                    case "vstr":
+                        funkt2();
+                        break;
+                    default:
+                        Console.WriteLine("Takoi komandi net");
+                        break;
+                }
+            }
+        }
+    }
+}
