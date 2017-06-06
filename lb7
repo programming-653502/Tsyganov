@@ -21,11 +21,7 @@ namespace space1
         public string Interesi { get; set; }
         public DateTime DenRozhden { get; set; }
         public string Info { get; set; }
-
-        public ludi()
-        {
-            Id = IdCounter++;
-        }
+        
 
         public virtual void Show()
         {
@@ -38,6 +34,10 @@ namespace space1
             Console.WriteLine($"Interesi: {Interesi}");
             Console.WriteLine($"den rozhdenia: {DenRozhden}");
             Console.WriteLine($"Info: {Info}");
+        }
+        public ludi()
+        {
+            Id = IdCounter++;
         }
     }
     class vstr
